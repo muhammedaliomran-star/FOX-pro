@@ -52,6 +52,20 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   });
 
+  // ── GitHub links ──
+  const GITHUB_URL = 'https://github.com/seotarek/lovable-pro';
+  const openGithub = (e) => {
+    e.preventDefault();
+    chrome.tabs.create({ url: GITHUB_URL });
+  };
+  document.getElementById('github-link')?.addEventListener('click', openGithub);
+  const footerGH = document.getElementById('footer-github');
+  if (footerGH) {
+    footerGH.addEventListener('click', openGithub);
+    footerGH.addEventListener('mouseenter', () => footerGH.style.color = 'var(--accent)');
+    footerGH.addEventListener('mouseleave', () => footerGH.style.color = 'var(--text-muted)');
+  }
+
   // ── Restore settings toggles ──
   setToggle('guard',     store.lp_guard     !== false);
   setToggle('autotoken', store.lp_autotoken !== false);
