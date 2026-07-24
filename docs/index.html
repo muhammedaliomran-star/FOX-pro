@@ -437,18 +437,17 @@ footer{border-top:1px solid var(--border);padding:40px 0;}
     <h2 class="section-title">احصل على مفتاك التجريبي الآن</h2>
     <p class="section-sub" style="margin:0 auto 40px">مولّد سريالات التجربة المباشر</p>
 
-    <div class="pricing-grid">
+    <div class="pricing-grid" style="grid-template-columns: repeat(3, 1fr);">
       <!-- Trial Card -->
-      <div class="pricing-card featured">
+      <div class="pricing-card">
         <div class="plan-name">Free Trial</div>
         <div class="plan-price">مجاني <span>/ 30 دقيقة</span></div>
         <div class="plan-desc">
-          Try it for 30 minutes. Generate an instant trial key, paste it into the extension activation menu, and test the browser package before buying a permanent license.
+          تجربة فورية لمدة 30 دقيقة لاختبار جميع ميزات الإضافة على حسابك فوراً.
         </div>
-        <button class="plan-btn primary" id="web-gen-trial-btn">
-          <span>🎁</span> Get Trial Key (الحصول على المفتاح التجريبي)
+        <button class="plan-btn primary" id="web-gen-trial-btn" style="margin-top:auto">
+          <span>🎁</span> Get Trial Key
         </button>
-
         <div class="key-box" id="web-key-box">
           <div style="font-size:12px;color:var(--green);font-weight:700">✅ تم توليد المفتاح بنجاح!</div>
           <div class="key-val" id="generated-key-display">TRIAL-XXXX-XXXX-XXXX</div>
@@ -458,18 +457,39 @@ footer{border-top:1px solid var(--border);padding:40px 0;}
         </div>
       </div>
 
-      <!-- Pro Card -->
-      <div class="pricing-card">
-        <div class="plan-name">Pro License</div>
-        <div class="plan-price">دائم / شهري</div>
+      <!-- Monthly Card -->
+      <div class="pricing-card featured">
+        <div class="plan-name">Pro الشهري</div>
+        <div class="plan-price">اشتراك <span>/ شهري</span></div>
         <div class="plan-desc">
-          ترخيص Pro كامل يمنحك استخداماً غير محدود بدون أي وقت انتهاء أو قيود.
+          بناء غير محدود بدون قيود لمدة شهر كامل مع دعم فني مخصص.
         </div>
-        <div style="padding:18px 0; font-size:14px; color:var(--text2)">
-          تواصل للحصول على ترخيص Pro مدفوع
+        <ul style="list-style:none;padding:0;margin:0 0 20px 0;text-align:right;font-size:13px;color:var(--text2);display:flex;flex-direction:column;gap:8px">
+          <li>✓ بناء غير محدود طوال الشهر</li>
+          <li>✓ حماية كاملة لحساب Lovable</li>
+          <li>✓ جلب الجلسة تلقائياً</li>
+          <li>✓ تحديثات الإضافة المجانية</li>
+        </ul>
+        <a href="https://wa.me/201009221223?text=مرحباً،%20أرغب%20في%20شراء%20اشتراك%20Lovable%20Pro%20الشهري" target="_blank" class="plan-btn primary">
+          💬 شراء الاشتراك الشهري عبر واتساب
+        </a>
+      </div>
+
+      <!-- Yearly Card -->
+      <div class="pricing-card" style="border-color: rgba(34,197,94,0.3); background: linear-gradient(135deg, rgba(34,197,94,0.04), rgba(255,90,0,0.02));">
+        <div class="plan-name" style="color:var(--green)">Pro السنوي (توفير 40%)</div>
+        <div class="plan-price">اشتراك <span>/ سنوي</span></div>
+        <div class="plan-desc">
+          الخيار الأفضل للمطورين والشركات — سنة كاملة بدون انقطاع بأفضل سعر.
         </div>
-        <a href="#faq" class="plan-btn" style="background:var(--surface2);border:1px solid var(--border);color:var(--text)">
-          التفاصيل والأسئلة
+        <ul style="list-style:none;padding:0;margin:0 0 20px 0;text-align:right;font-size:13px;color:var(--text2);display:flex;flex-direction:column;gap:8px">
+          <li>✓ بناء غير محدود طوال السنة</li>
+          <li>✓ توفير كبيييير مقارنة بالشهري</li>
+          <li>✓ دعم فني أولوية 24/7</li>
+          <li>✓ تفعيل على عدة أجهزة</li>
+        </ul>
+        <a href="https://wa.me/201009221223?text=مرحباً،%20أرغب%20في%20شراء%20اشتراك%20Lovable%20Pro%20السنوي" target="_blank" class="plan-btn" style="background:var(--green);color:#fff;box-shadow:0 4px 16px rgba(34,197,94,0.25)">
+          💬 شراء الاشتراك السنوي عبر واتساب
         </a>
       </div>
     </div>
