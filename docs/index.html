@@ -108,7 +108,7 @@ nav{
 section{position:relative;z-index:1}
 .container{max-width:1100px;margin:0 auto;padding:0 24px;}
 
-.hero{padding:160px 24px 100px;text-align:center;position:relative;}
+.hero{padding:160px 24px 80px;text-align:center;position:relative;}
 .hero-badge{
   display:inline-flex;align-items:center;gap:6px;
   padding:6px 14px;border-radius:20px;
@@ -169,7 +169,7 @@ section{position:relative;z-index:1}
 
 .hero-mockup{
   position:relative;
-  max-width:460px;
+  max-width:480px;
   margin:0 auto;
   animation:float 4s ease-in-out infinite;
 }
@@ -180,6 +180,18 @@ section{position:relative;z-index:1}
 .hero-mockup img{
   width:100%;border-radius:20px;
   box-shadow:var(--shadow-glow), 0 40px 80px rgba(0,0,0,0.6);
+}
+
+.demo-section{
+  padding:60px 0 100px;
+  text-align:center;
+}
+.demo-box{
+  max-width:880px;margin:0 auto;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:24px;padding:24px;
+  box-shadow:0 30px 60px rgba(0,0,0,0.4);
 }
 
 .stats-bar{
@@ -243,10 +255,26 @@ section{position:relative;z-index:1}
 .card-title{font-size:17px;font-weight:800;margin-bottom:8px;}
 .card-desc{font-size:14px;color:var(--text2);line-height:1.6;}
 
+/* License Checker Section */
+.checker-section{
+  padding:90px 0;
+  background:var(--bg2);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+.checker-card{
+  max-width:680px;margin:0 auto;
+  background:var(--surface);
+  border:1px solid rgba(162,89,255,0.25);
+  border-radius:24px;padding:32px;
+  box-shadow:0 20px 50px rgba(0,0,0,0.3);
+}
+
 .pricing{padding:100px 0}
 .pricing-grid{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:24px;max-width:860px;margin:56px auto 0;
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:24px;max-width:960px;margin:56px auto 0;
 }
 .pricing-card{
   background:var(--surface);
@@ -254,26 +282,28 @@ section{position:relative;z-index:1}
   border-radius:24px;padding:36px;
   position:relative;overflow:hidden;
   text-align:right;
+  display:flex;flex-direction:column;
 }
 .pricing-card.featured{
   border-color:rgba(162,89,255,0.4);
   background:linear-gradient(135deg,rgba(162,89,255,0.06),rgba(255,90,0,0.04));
 }
 .pricing-card.featured::before{
-  content:'تجربة فورية';
+  content:'الأكثر شعبية';
   position:absolute;top:20px;left:20px;
   padding:4px 12px;border-radius:20px;
   background:var(--grad);color:#fff;
   font-size:11px;font-weight:700;
 }
 .plan-name{font-size:13px;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
-.plan-price{font-size:2.6rem;font-weight:900;letter-spacing:-1px;margin-bottom:8px;line-height:1;}
+.plan-price{font-size:2.4rem;font-weight:900;letter-spacing:-1px;margin-bottom:8px;line-height:1;}
 .plan-desc{font-size:13px;color:var(--text2);margin-bottom:24px;line-height:1.6}
 
 .plan-btn{
   width:100%;padding:14px;border-radius:12px;
   font-size:15px;font-weight:700;cursor:pointer;border:none;
   transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:8px;
+  text-align:center;text-decoration:none;
 }
 .plan-btn.primary{
   background:var(--grad);color:#fff;
@@ -288,7 +318,6 @@ section{position:relative;z-index:1}
   border:1px solid rgba(162,89,255,0.3);
   border-radius:14px;
   display:none;
-  animation:fadeIn 0.3s ease;
 }
 .key-val{
   font-family:'JetBrains Mono',monospace;
@@ -326,10 +355,11 @@ footer{border-top:1px solid var(--border);padding:40px 0;}
 .footer-logo{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:700;}
 .footer-copy{font-size:12px;color:var(--text3)}
 
-@media(max-width:768px){
-  .bento{grid-template-columns:1fr}
-  .bento-card.wide{grid-column:span 1}
-  .pricing-grid{grid-template-columns:1fr}
+@media(max-width:900px){
+  .pricing-grid{grid-template-columns:1fr !important;}
+  .bento{grid-template-columns:1fr !important;}
+  .bento-card.wide{grid-column:span 1 !important;}
+  .nav-links{display:none;}
 }
 </style>
 </head>
@@ -346,8 +376,10 @@ footer{border-top:1px solid var(--border);padding:40px 0;}
   </div>
   <div class="nav-links">
     <a href="#features" class="nav-link">المميزات</a>
+    <a href="#demo" class="nav-link">معاينة حيّة</a>
+    <a href="#checker" class="nav-link">فحص الترخيص</a>
     <a href="#trial" class="nav-link">التجربة المجانية</a>
-    <a href="#pricing" class="nav-link">الخطط والأسعار</a>
+    <a href="#pricing" class="nav-link">الأسعار</a>
     <a href="#faq" class="nav-link">الأسئلة الشائعة</a>
   </div>
   <a href="https://github.com/seotarek/lovable-pro/raw/main/lovable-pro-v1.0.0.zip" class="nav-cta">
@@ -392,8 +424,43 @@ footer{border-top:1px solid var(--border);padding:40px 0;}
       الحصول على تجربة مجانية
     </a>
   </div>
+
   <div class="hero-mockup">
     <img src="assets/mockup.png" alt="Lovable Pro Extension Interface Preview">
+  </div>
+</section>
+
+<!-- LIVE DEMO SECTION -->
+<section class="demo-section" id="demo">
+  <div class="container">
+    <span class="section-label">معاينة تفاعلية</span>
+    <h2 class="section-title">شاهد الإضافة وهي تعمل لايف داخل Lovable.dev</h2>
+    <p class="section-sub" style="margin:0 auto 36px">اندماج سلس وحماية كاملة أثناء بناء وتطوير تطبيقاتك</p>
+
+    <div class="demo-box">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding-bottom:14px;border-bottom:1px solid var(--border);margin-bottom:16px">
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="width:10px;height:10px;border-radius:50%;background:#ef4444"></span>
+          <span style="width:10px;height:10px;border-radius:50%;background:#f59e0b"></span>
+          <span style="width:10px;height:10px;border-radius:50%;background:#22c55e"></span>
+          <span style="font-size:12px;color:var(--text3);margin-right:8px">https://lovable.dev/projects/workspace</span>
+        </div>
+        <span style="font-size:11px;font-weight:700;color:var(--green);background:rgba(34,197,94,0.1);padding:4px 10px;border-radius:20px;border:1px solid rgba(34,197,94,0.2)">
+          🛡️ Lovable Pro Active
+        </span>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;text-align:right">
+        <div style="background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:16px">
+          <div style="font-size:12px;color:var(--accent2);font-weight:700;margin-bottom:8px">⚡ جلب الجلسة والـ Token تلقائياً</div>
+          <p style="font-size:12px;color:var(--text2);line-height:1.6">تستخرج الإضافة بيانات الـ Session Token والـ Project ID تلقائياً وتوجه الطلبات إلى خوادمنا دون أي تعديل يدوي.</p>
+        </div>
+        <div style="background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:16px">
+          <div style="font-size:12px;color:var(--accent);font-weight:700;margin-bottom:8px">🚀 برومبتات غير محدودة</div>
+          <p style="font-size:12px;color:var(--text2);line-height:1.6">يمكنك الاستمرار في كتابة البرومبتات وبناء التطبيقات دون توقف بسبب انتهاء الـ 5 نقاط المجانية لـ Lovable.</p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -447,14 +514,44 @@ footer{border-top:1px solid var(--border);padding:40px 0;}
   </div>
 </section>
 
+<!-- ONLINE LICENSE CHECKER SECTION -->
+<section class="checker-section" id="checker">
+  <div class="container" style="text-align:center">
+    <span class="section-label">أداة الاستعلام</span>
+    <h2 class="section-title">فحص حالة الترخيص أونلاين</h2>
+    <p class="section-sub" style="margin:0 auto 36px">أدخل مفتاح الترخيص لمعرفة التفاصيل والصلاحية فوراً</p>
+
+    <div class="checker-card">
+      <div style="display:flex;gap:10px;margin-bottom:16px">
+        <input type="text" id="checker-input" placeholder="EKLAS-XXXX-XXXX-XXXX أو TRIAL-XXXX..."
+          style="flex:1;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:12px 16px;color:var(--text);font-family:monospace;font-size:14px;outline:none">
+        <button id="checker-btn" class="plan-btn primary" style="width:auto;padding:12px 24px">
+          🔍 فحص الترخيص
+        </button>
+      </div>
+
+      <div id="checker-result" style="display:none;background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:20px;text-align:right">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+          <span style="font-size:13px;font-weight:700;color:var(--text2)">نتيجة الفحص:</span>
+          <span id="checker-status-pill" style="font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px"></span>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:13px">
+          <div><span style="color:var(--text3)">الخطة:</span> <strong id="checker-plan" style="color:var(--accent)">—</strong></div>
+          <div><span style="color:var(--text3)">تاريخ الانتهاء:</span> <strong id="checker-expiry" style="color:var(--text)">—</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- PRICING & TRIAL -->
 <section class="pricing" id="pricing">
   <div class="container" style="text-align:center">
     <span class="section-label" id="trial">التجربة والخطط</span>
-    <h2 class="section-title">احصل على مفتاك التجريبي الآن</h2>
-    <p class="section-sub" style="margin:0 auto 40px">مولّد سريالات التجربة المباشر</p>
+    <h2 class="section-title">احصل على مفتاحك التجريبي الآن</h2>
+    <p class="section-sub" style="margin:0 auto 40px">مولّد سريالات التجربة المباشر والأسعار</p>
 
-    <div class="pricing-grid" style="grid-template-columns: repeat(3, 1fr);">
+    <div class="pricing-grid">
       <!-- Trial Card -->
       <div class="pricing-card">
         <div class="plan-name">Free Trial</div>
@@ -575,6 +672,7 @@ footer{border-top:1px solid var(--border);padding:40px 0;}
 <script>
 const RESELLER_KEY = '21098106_live_Tetg7cxqzbiqdKEGPFZGiZgGxH4YOEnI';
 
+// Trial key generator
 document.getElementById('web-gen-trial-btn').addEventListener('click', async () => {
   const btn = document.getElementById('web-gen-trial-btn');
   const box = document.getElementById('web-key-box');
@@ -608,12 +706,12 @@ document.getElementById('web-gen-trial-btn').addEventListener('click', async () 
     } else {
       alert('خطأ أثناء توليد المفتاح: ' + (data.error || 'يرجى المحاولة لاحقاً'));
       btn.disabled = false;
-      btn.innerText = '🎁 Get Trial Key (الحصول على المفتاح التجريبي)';
+      btn.innerText = '🎁 Get Trial Key';
     }
   } catch (e) {
     alert('فشل الاتصال بالخادم لتوليد المفتاح التجريبي');
     btn.disabled = false;
-    btn.innerText = '🎁 Get Trial Key (الحصول على المفتاح التجريبي)';
+    btn.innerText = '🎁 Get Trial Key';
   }
 });
 
@@ -624,6 +722,44 @@ document.getElementById('copy-trial-btn').addEventListener('click', () => {
     btn.innerText = '✅ تم النسخ!';
     setTimeout(() => btn.innerText = '📋 نسخ المفتاح (Copy Key)', 2000);
   });
+});
+
+// Online License Checker
+document.getElementById('checker-btn').addEventListener('click', async () => {
+  const key = document.getElementById('checker-input').value.trim();
+  const resBox = document.getElementById('checker-result');
+  const statusPill = document.getElementById('checker-status-pill');
+  const planEl = document.getElementById('checker-plan');
+  const expiryEl = document.getElementById('checker-expiry');
+
+  if (!key) { alert('أدخل مفتاح الترخيص أولاً'); return; }
+
+  try {
+    const res = await fetch('https://io.eklas.dev/api/v1/licenses/validate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ key, licenseKey: key, heartbeat: false })
+    });
+    const data = await res.json();
+    const isValid = !!(data.ok || data.valid || data.status === 'active');
+
+    resBox.style.display = 'block';
+    if (isValid) {
+      statusPill.innerText = '✅ نشط (Active)';
+      statusPill.style.background = 'rgba(34,197,94,0.15)';
+      statusPill.style.color = '#22c55e';
+      planEl.innerText = data.license?.plan || data.plan || 'Pro';
+      expiryEl.innerText = data.license?.expires_at ? new Date(data.license.expires_at).toLocaleDateString() : 'ساري';
+    } else {
+      statusPill.innerText = '❌ غير صحيح / منتهي';
+      statusPill.style.background = 'rgba(239,68,68,0.15)';
+      statusPill.style.color = '#ef4444';
+      planEl.innerText = 'غير مفعّل';
+      expiryEl.innerText = '—';
+    }
+  } catch (e) {
+    alert('فشل الاتصال بخادم الفحص');
+  }
 });
 
 // FAQ Accordion
