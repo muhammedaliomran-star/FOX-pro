@@ -4,6 +4,7 @@
 // ══════════════════════════════════════════
 
 const API_BASE = 'https://io.eklas.dev/api/v1';
+const RESELLER_API_KEY = '21098106_live_Tetg7cxqzbiqdKEGPFZGiZgGxH4YOEnI';
 let licenseData = null;
 
 // ═══════════════════════════════
@@ -37,6 +38,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // ── Activate page ──
   document.getElementById('btn-activate').addEventListener('click', activateLicense);
   document.getElementById('btn-deactivate').addEventListener('click', deactivateLicense);
+  document.getElementById('btn-get-trial').addEventListener('click', getTrialKey);
 
   // ── Settings page ──
   document.querySelectorAll('.toggle[data-setting]').forEach(toggle => {
@@ -51,20 +53,6 @@ document.addEventListener('DOMContentLoaded', async () => {
       item.classList.toggle('open');
     });
   });
-
-  // ── GitHub links ──
-  const GITHUB_URL = 'https://github.com/seotarek/lovable-pro';
-  const openGithub = (e) => {
-    e.preventDefault();
-    chrome.tabs.create({ url: GITHUB_URL });
-  };
-  document.getElementById('github-link')?.addEventListener('click', openGithub);
-  const footerGH = document.getElementById('footer-github');
-  if (footerGH) {
-    footerGH.addEventListener('click', openGithub);
-    footerGH.addEventListener('mouseenter', () => footerGH.style.color = 'var(--accent)');
-    footerGH.addEventListener('mouseleave', () => footerGH.style.color = 'var(--text-muted)');
-  }
 
   // ── Restore settings toggles ──
   setToggle('guard',     store.lp_guard     !== false);
@@ -156,6 +144,49 @@ function renderInactiveLicense() {
   document.getElementById('btn-reload').style.display = 'none';
   document.getElementById('btn-go-activate').style.display = 'flex';
   document.getElementById('deactivate-card').style.display = 'none';
+}
+
+// ═══════════════════════════════
+//  Generate Trial Key
+// ═══════════════════════════════
+async function getTrialKey() {
+  const btn = document.getElementById('btn-get-trial');
+  btn.disabled = true;
+  btn.innerHTML = `<div class="btn-spinner"></div> ${t('generating_trial')}`;
+  hideAlert('activate-error');
+  hideAlert('activate-success');
+
+  try {
+    const res = await fetch(`${API_BASE}/license/generate`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${RESELLER_API_KEY}`
+      },
+      body: JSON.stringify({
+        plan: 'Trial',
+        durationValue: 30,
+        durationUnit: 'minute',
+        maxActivations: 5
+      })
+    });
+
+    const data = await res.json();
+    const key = data.license_key || data.key;
+
+    if (data.ok && key) {
+      document.getElementById('license-input').value = key;
+      await activateLicense();
+    } else {
+      showAlert('activate-error', data.error || (currentLang === 'ar' ? 'فشل توليد المفتاح التجريبي' : 'Failed to generate trial key'));
+      btn.disabled = false;
+      btn.innerHTML = `<span>⚡</span> <span>${t('btn_get_trial')}</span>`;
+    }
+  } catch (e) {
+    showAlert('activate-error', currentLang === 'ar' ? 'خطأ في الاتصال أثناء توليد المفتاح' : 'Connection error while generating key');
+    btn.disabled = false;
+    btn.innerHTML = `<span>⚡</span> <span>${t('btn_get_trial')}</span>`;
+  }
 }
 
 // ═══════════════════════════════

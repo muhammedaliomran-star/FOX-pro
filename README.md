@@ -6,7 +6,6 @@
     <img src="https://img.shields.io/badge/version-1.0.0-ff5a00?style=flat-square">
     <img src="https://img.shields.io/badge/manifest-v3-a259ff?style=flat-square">
     <img src="https://img.shields.io/badge/languages-AR%20%7C%20EN-22c55e?style=flat-square">
-    <img src="https://img.shields.io/badge/license-MIT-blue?style=flat-square">
   </p>
 </div>
 
@@ -15,6 +14,7 @@
 ## ✨ المميزات
 
 - 🌍 **ثنائي اللغة** — واجهة كاملة عربي وإنجليزي مع دعم RTL
+- 🎁 **مفتاح تجريبي فوري** — توليد سيريال تجربة 30 دقيقة بنقرة واحدة من الإضافة أو الصفحة
 - 🗂️ **4 صفحات منفصلة** — الرئيسية، التفعيل، الإعدادات، المساعدة
 - 🔑 **إدارة الترخيص** — تفعيل وإلغاء تفعيل مباشر من الـ popup
 - 📊 **لوحة إحصائيات** — الخطة، الحالة، تاريخ الانتهاء، شريط المدة
@@ -25,28 +25,12 @@
 
 ---
 
-## 📸 الواجهة
+## 🎁 التجربة المجانية (Free Trial)
 
-| الرئيسية | التفعيل | الإعدادات | المساعدة |
-|:---:|:---:|:---:|:---:|
-| لوحة الحالة والإحصائيات | إدخال وإدارة السيريال | الإعدادات والجلسة | accordion للمشكلات الشائعة |
-
----
-
-## 🚀 التثبيت
-
-### التطوير المحلي
-
-```bash
-git clone https://github.com/seotarek/lovable-pro.git
-cd lovable-pro
-```
-
-ثم في Chrome:
-1. افتح `chrome://extensions`
-2. فعّل **Developer mode**
-3. اضغط **Load unpacked**
-4. اختار مجلد المشروع
+يمكن للمستخدمين تجربة الإضافة لمدة **30 دقيقة** فوراً:
+1. افتح صفحة التفعيل في الإضافة أو الموقع.
+2. اضغط على **"توليد مفتاح تجريبي" (Get Trial Key)**.
+3. يتم توليد وتفعيل مفتاح التجربة فوراً لبدء العمل.
 
 ---
 
@@ -60,9 +44,11 @@ lovable-pro/
 │   ├── background.js          ← Service worker + API + heartbeat
 │   ├── content.js             ← حقن في lovable.dev
 │   ├── i18n.js               ← ترجمات عربي / إنجليزي
-│   └── popup.js               ← منطق الـ popup
+│   └── popup.js               ← منطق الـ popup + توليد التجربة
 ├── styles/
 │   └── main.css               ← Design system كامل
+├── docs/
+│   └── index.html             ← GitHub Pages Landing Page
 └── icons/
     ├── icon-ar-*.png          ← أيقونة عربية (ل)
     └── icon-en-*.png          ← أيقونة إنجليزية (L)
@@ -70,21 +56,9 @@ lovable-pro/
 
 ---
 
-## ⚙️ الـ API
-
-تعتمد الإضافة على `io.eklas.dev`:
-
-| Endpoint | الوظيفة |
-|---|---|
-| `POST /licenses/validate` | التحقق من السيريال |
-| `POST /lovable/chat` | إرسال برومبت |
-| `POST /lovable/source-code` | جلب الكود |
-
----
-
 ## 👤 المطور
 
-**seotarek** — [github.com/seotarek](https://github.com/seotarek)
+**seotarek**
 
 ---
 

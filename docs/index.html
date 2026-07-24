@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lovable Pro — إضافة المتصفح للبناء غير المحدود</title>
+<meta name="description" content="Lovable Pro Extension for Unlimited Prompts — Unlimited Credits & Free Trial. Generate an instant trial key and start building on Lovable.dev without limits.">
+<meta name="keywords" content="Lovable Extension for Unlimited Prompt, Lovable Extension, Unlimited Credits, Free Trial Lovable Unlimited Credits, Free Credits, Lovable Extension Download">
+<meta property="og:title" content="Lovable Pro — Unlimited Prompts & Free Trial">
+<meta property="og:description" content="Download Lovable Pro extension for unlimited prompts and credits. Start with a free 30-minute trial key immediately.">
+<meta property="og:image" content="assets/mockup.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #07070a;
+  --bg2: #0f0f14;
+  --surface: #16161e;
+  --surface2: #1c1c27;
+  --border: rgba(255,255,255,0.06);
+  --accent: #ff5a00;
+  --accent2: #a259ff;
+  --green: #22c55e;
+  --text: #f0f0f8;
+  --text2: #9898b0;
+  --text3: #55556a;
+  --grad: linear-gradient(135deg, #ff5a00, #a259ff);
+  --shadow-glow: 0 0 60px rgba(255,90,0,0.15), 0 0 120px rgba(162,89,255,0.08);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Cairo','Inter',system-ui,sans-serif;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:4px}
+
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;opacity:0.4;
+}
+
+.orb{
+  position:fixed;border-radius:50%;filter:blur(100px);
+  pointer-events:none;z-index:0;
+}
+.orb-1{
+  width:600px;height:600px;
+  background:radial-gradient(circle,rgba(255,90,0,0.12),transparent 70%);
+  top:-200px;right:-150px;
+}
+.orb-2{
+  width:500px;height:500px;
+  background:radial-gradient(circle,rgba(162,89,255,0.1),transparent 70%);
+  bottom:-100px;left:-150px;
+}
+
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:14px 24px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(7,7,10,0.8);
+  backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{display:flex;align-items:center;gap:10px;}
+.logo-icon{
+  width:32px;height:32px;
+  background:var(--grad);
+  border-radius:9px;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:16px;color:#fff;
+  box-shadow:0 4px 16px rgba(255,90,0,0.3);
+}
+.logo-text{font-size:16px;font-weight:800;letter-spacing:-0.3px;}
+.logo-text span{
+  background:var(--grad);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.nav-links{display:flex;align-items:center;gap:8px;}
+.nav-link{
+  padding:7px 14px;border-radius:8px;
+  font-size:14px;font-weight:600;color:var(--text2);
+  transition:all 0.2s;
+}
+.nav-link:hover{color:var(--text);background:var(--surface)}
+.nav-cta{
+  padding:8px 20px;
+  background:var(--grad);
+  border-radius:9px;
+  font-size:14px;font-weight:700;color:#fff;
+  box-shadow:0 4px 16px rgba(255,90,0,0.25);
+  transition:all 0.2s;
+}
+.nav-cta:hover{opacity:0.88;transform:translateY(-1px);box-shadow:0 8px 24px rgba(255,90,0,0.3)}
+
+section{position:relative;z-index:1}
+.container{max-width:1100px;margin:0 auto;padding:0 24px;}
+
+.hero{padding:160px 24px 100px;text-align:center;position:relative;}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:6px 14px;border-radius:20px;
+  background:rgba(255,90,0,0.08);
+  border:1px solid rgba(255,90,0,0.2);
+  font-size:13px;font-weight:600;color:var(--accent);
+  margin-bottom:24px;
+}
+.hero-badge::before{
+  content:'';width:6px;height:6px;border-radius:50%;
+  background:var(--accent);
+  animation:pulse 2s ease-in-out infinite;
+}
+@keyframes pulse{
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:0.5;transform:scale(0.8)}
+}
+.hero h1{
+  font-size:clamp(2.4rem,5vw,4rem);
+  font-weight:900;
+  line-height:1.1;
+  letter-spacing:-1.5px;
+  margin-bottom:20px;
+}
+.hero h1 .grad{
+  background:var(--grad);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.hero-sub{
+  font-size:clamp(1rem,2vw,1.2rem);
+  color:var(--text2);
+  max-width:580px;
+  margin:0 auto 36px;
+  line-height:1.7;
+}
+.hero-actions{
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  flex-wrap:wrap;margin-bottom:60px;
+}
+.btn-hero{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 28px;border-radius:12px;
+  font-size:15px;font-weight:700;
+  transition:all 0.2s;cursor:pointer;border:none;
+}
+.btn-primary{
+  background:var(--grad);color:#fff;
+  box-shadow:0 8px 32px rgba(255,90,0,0.3);
+}
+.btn-primary:hover{opacity:0.88;transform:translateY(-2px);box-shadow:0 12px 40px rgba(255,90,0,0.4)}
+.btn-secondary{
+  background:var(--surface);
+  border:1px solid var(--border);
+  color:var(--text);
+}
+.btn-secondary:hover{border-color:rgba(255,90,0,0.3);transform:translateY(-1px)}
+
+.hero-mockup{
+  position:relative;
+  max-width:460px;
+  margin:0 auto;
+  animation:float 4s ease-in-out infinite;
+}
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-12px)}
+}
+.hero-mockup img{
+  width:100%;border-radius:20px;
+  box-shadow:var(--shadow-glow), 0 40px 80px rgba(0,0,0,0.6);
+}
+
+.stats-bar{
+  padding:40px 0;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  background:var(--bg2);
+}
+.stats-inner{display:flex;justify-content:center;gap:0;flex-wrap:wrap;}
+.stat-item{padding:16px 40px;text-align:center;border-left:1px solid var(--border);}
+.stat-item:first-child{border-left:none}
+.stat-num{
+  font-size:2rem;font-weight:900;
+  background:var(--grad);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  line-height:1;margin-bottom:4px;
+}
+.stat-label{font-size:12px;color:var(--text3);font-weight:600;text-transform:uppercase;letter-spacing:0.5px;}
+
+.features{padding:100px 0}
+.section-label{
+  display:inline-block;
+  font-size:12px;font-weight:700;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--accent);
+  margin-bottom:12px;
+}
+.section-title{
+  font-size:clamp(1.8rem,3.5vw,2.8rem);
+  font-weight:900;letter-spacing:-0.5px;
+  margin-bottom:14px;line-height:1.2;
+}
+.section-sub{font-size:1.05rem;color:var(--text2);max-width:520px;line-height:1.7;margin-bottom:56px;}
+
+.bento{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+}
+.bento-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:28px;
+  position:relative;overflow:hidden;
+  transition:all 0.3s cubic-bezier(0.16,1,0.3,1);
+}
+.bento-card:hover{
+  border-color:rgba(255,90,0,0.2);
+  transform:translateY(-4px);
+  box-shadow:0 20px 40px rgba(0,0,0,0.3);
+}
+.bento-card.wide{grid-column:span 2}
+.card-icon{
+  width:44px;height:44px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;margin-bottom:16px;
+}
+.card-icon.orange{background:rgba(255,90,0,0.1);}
+.card-icon.purple{background:rgba(162,89,255,0.1);}
+.card-icon.green{background:rgba(34,197,94,0.1);}
+.card-title{font-size:17px;font-weight:800;margin-bottom:8px;}
+.card-desc{font-size:14px;color:var(--text2);line-height:1.6;}
+
+.pricing{padding:100px 0}
+.pricing-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:24px;max-width:860px;margin:56px auto 0;
+}
+.pricing-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:24px;padding:36px;
+  position:relative;overflow:hidden;
+  text-align:right;
+}
+.pricing-card.featured{
+  border-color:rgba(162,89,255,0.4);
+  background:linear-gradient(135deg,rgba(162,89,255,0.06),rgba(255,90,0,0.04));
+}
+.pricing-card.featured::before{
+  content:'تجربة فورية';
+  position:absolute;top:20px;left:20px;
+  padding:4px 12px;border-radius:20px;
+  background:var(--grad);color:#fff;
+  font-size:11px;font-weight:700;
+}
+.plan-name{font-size:13px;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+.plan-price{font-size:2.6rem;font-weight:900;letter-spacing:-1px;margin-bottom:8px;line-height:1;}
+.plan-desc{font-size:13px;color:var(--text2);margin-bottom:24px;line-height:1.6}
+
+.plan-btn{
+  width:100%;padding:14px;border-radius:12px;
+  font-size:15px;font-weight:700;cursor:pointer;border:none;
+  transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.plan-btn.primary{
+  background:var(--grad);color:#fff;
+  box-shadow:0 4px 20px rgba(255,90,0,0.25);
+}
+.plan-btn.primary:hover{opacity:0.9;transform:translateY(-1px)}
+
+/* Trial Key Result Box */
+.key-box{
+  margin-top:20px;padding:16px;
+  background:var(--surface2);
+  border:1px solid rgba(162,89,255,0.3);
+  border-radius:14px;
+  display:none;
+  animation:fadeIn 0.3s ease;
+}
+.key-val{
+  font-family:'JetBrains Mono',monospace;
+  font-size:16px;font-weight:700;
+  color:var(--accent);
+  background:rgba(255,90,0,0.1);
+  padding:10px 14px;border-radius:8px;
+  margin:10px 0;letter-spacing:1px;
+  word-break:break-all;text-align:center;
+  border:1px dashed rgba(255,90,0,0.3);
+}
+
+.faq{padding:100px 0;background:var(--bg2)}
+.faq-list{max-width:720px;margin:56px auto 0;display:flex;flex-direction:column;gap:12px}
+.faq-item{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;}
+.faq-q{
+  padding:18px 22px;
+  display:flex;align-items:center;justify-content:space-between;
+  cursor:pointer;font-size:15px;font-weight:700;gap:12px;
+}
+.faq-q:hover{background:var(--surface2)}
+.faq-icon{
+  width:28px;height:28px;border-radius:7px;
+  background:var(--surface2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;flex-shrink:0;transition:transform 0.25s;
+}
+.faq-item.open .faq-icon{transform:rotate(45deg);background:var(--accent);color:#fff;}
+.faq-a{max-height:0;overflow:hidden;transition:max-height 0.35s cubic-bezier(0.16,1,0.3,1);}
+.faq-a-inner{padding:0 22px 18px;font-size:14px;color:var(--text2);line-height:1.7;}
+.faq-item.open .faq-a{max-height:300px}
+
+footer{border-top:1px solid var(--border);padding:40px 0;}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+.footer-logo{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:700;}
+.footer-copy{font-size:12px;color:var(--text3)}
+
+@media(max-width:768px){
+  .bento{grid-template-columns:1fr}
+  .bento-card.wide{grid-column:span 1}
+  .pricing-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="logo-icon">L</div>
+    <div class="logo-text">Lovable <span>Pro</span></div>
+  </div>
+  <div class="nav-links">
+    <a href="#features" class="nav-link">المميزات</a>
+    <a href="#trial" class="nav-link">التجربة المجانية</a>
+    <a href="#pricing" class="nav-link">الخطط والأسعار</a>
+    <a href="#faq" class="nav-link">الأسئلة الشائعة</a>
+  </div>
+  <a href="#trial" class="nav-cta">
+    تجربة مجانية الان ←
+  </a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">
+    ✦ Lovable Extension for Unlimited Prompts & Credits
+  </div>
+  <h1>
+    ابنِ تطبيقات كاملة<br>
+    <span class="grad">بلا حدود وبدون قيود</span>
+  </h1>
+  <p class="hero-sub">
+    استمتع بالقوة الكاملة لـ Lovable AI. احصل على مفتاح تجريبي فوري واختبر الإضافة الآن.
+  </p>
+  <div class="hero-actions">
+    <a href="#trial" class="btn-hero btn-primary">
+      <span>⚡</span> الحصول على مفتاح تجريبي
+    </a>
+    <a href="#features" class="btn-hero btn-secondary">
+      استكشف المميزات
+    </a>
+  </div>
+  <div class="hero-mockup">
+    <img src="assets/mockup.png" alt="Lovable Pro Extension Interface Preview">
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-num">∞</div>
+      <div class="stat-label">Unlimited Prompts</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">30 m</div>
+      <div class="stat-label">Free Trial</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">AR / EN</div>
+      <div class="stat-label">Dual Language</div>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="container">
+    <span class="section-label">المميزات الاحترافية</span>
+    <h2 class="section-title">كل ما تحتاجه للعمل دون انقطاع</h2>
+    <p class="section-sub">إضافة متكاملة تمنحك التحكم الكامل في حسابك</p>
+
+    <div class="bento">
+      <div class="bento-card wide">
+        <div class="card-icon orange">🌍</div>
+        <div class="card-title">واجهة مزدوجة بالعربية والإنجليزية</div>
+        <div class="card-desc">دعم كامل للغة العربية RTL وتصميم عصري متجاوب مع إمكانية التبديل الفوري للغة الإنجليزية.</div>
+      </div>
+      <div class="bento-card">
+        <div class="card-icon purple">🔑</div>
+        <div class="card-title">توليد مفاتيح تجريبية</div>
+        <div class="card-desc">توليد مفاتيح تجربة 30 دقيقة فورية لتجربة كل الميزات قبل الشراء.</div>
+      </div>
+      <div class="bento-card">
+        <div class="card-icon green">🛡️</div>
+        <div class="card-title">حماية نموذج Lovable</div>
+        <div class="card-desc">منع استهلاك النموذج أو استخدامه بدون ترخيص موثق.</div>
+      </div>
+      <div class="bento-card wide">
+        <div class="card-icon purple">⚡</div>
+        <div class="card-title">استخراج الجلسة تلقائياً</div>
+        <div class="card-desc">تستخرج الإضافة الـ Session Token والـ Project ID تلقائياً عند فتح منصة Lovable.dev.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING & TRIAL -->
+<section class="pricing" id="pricing">
+  <div class="container" style="text-align:center">
+    <span class="section-label" id="trial">التجربة والخطط</span>
+    <h2 class="section-title">احصل على مفتاك التجريبي الآن</h2>
+    <p class="section-sub" style="margin:0 auto 40px">مولّد سريالات التجربة المباشر</p>
+
+    <div class="pricing-grid">
+      <!-- Trial Card -->
+      <div class="pricing-card featured">
+        <div class="plan-name">Free Trial</div>
+        <div class="plan-price">مجاني <span>/ 30 دقيقة</span></div>
+        <div class="plan-desc">
+          Try it for 30 minutes. Generate an instant trial key, paste it into the extension activation menu, and test the browser package before buying a permanent license.
+        </div>
+        <button class="plan-btn primary" id="web-gen-trial-btn">
+          <span>🎁</span> Get Trial Key (الحصول على المفتاح التجريبي)
+        </button>
+
+        <div class="key-box" id="web-key-box">
+          <div style="font-size:12px;color:var(--green);font-weight:700">✅ تم توليد المفتاح بنجاح!</div>
+          <div class="key-val" id="generated-key-display">TRIAL-XXXX-XXXX-XXXX</div>
+          <button class="plan-btn" id="copy-trial-btn" style="background:var(--surface);border:1px solid var(--border);color:var(--text);font-size:13px;padding:8px">
+            📋 نسخ المفتاح (Copy Key)
+          </button>
+        </div>
+      </div>
+
+      <!-- Pro Card -->
+      <div class="pricing-card">
+        <div class="plan-name">Pro License</div>
+        <div class="plan-price">دائم / شهري</div>
+        <div class="plan-desc">
+          ترخيص Pro كامل يمنحك استخداماً غير محدود بدون أي وقت انتهاء أو قيود.
+        </div>
+        <div style="padding:18px 0; font-size:14px; color:var(--text2)">
+          تواصل للحصول على ترخيص Pro مدفوع
+        </div>
+        <a href="#faq" class="plan-btn" style="background:var(--surface2);border:1px solid var(--border);color:var(--text)">
+          التفاصيل والأسئلة
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="container" style="text-align:center">
+    <span class="section-label">الأسئلة الشائعة</span>
+    <h2 class="section-title">إجابات لجميع استفساراتك</h2>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">
+          كيف أستخدم المفتاح التجريبي؟
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            اضغط على زر "Get Trial Key" أعلاه للحصول على مفتاح تجريبي لمدة 30 دقيقة. انسخ المفتاح، افتح إضافة Lovable Pro في المتصفح، انتقل إلى صفحة التفعيل، وألصق المفتاح ثم اضغط تفعيل.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          ما هي المتطلبات لتشغيل الإضافة؟
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            متصفح Chrome أو أي متصفح مبني على Chromium (مثل Edge, Kiwi, Brave)، وحساب على منصة Lovable.dev مع توفر كريديت واحد على الأقل.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          هل أحتاج لشراء ترخيص لاستخدام التجربة؟
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            لا، التجربة المجانية متاحة فوراً وبدون أي رسوم لاختبار كل الميزات قبل الشراء.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner" style="justify-content:center;text-align:center">
+      <div class="footer-logo">
+        <div class="logo-icon" style="width:26px;height:26px;font-size:12px">L</div>
+        <span>Lovable <span style="background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Pro</span></span>
+      </div>
+    </div>
+    <div style="margin-top:16px;text-align:center">
+      <span class="footer-copy">© 2026 Lovable Pro. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const RESELLER_KEY = '21098106_live_Tetg7cxqzbiqdKEGPFZGiZgGxH4YOEnI';
+
+document.getElementById('web-gen-trial-btn').addEventListener('click', async () => {
+  const btn = document.getElementById('web-gen-trial-btn');
+  const box = document.getElementById('web-key-box');
+  const display = document.getElementById('generated-key-display');
+
+  btn.disabled = true;
+  btn.innerText = '⚡ جاري توليد المفتاح...';
+
+  try {
+    const res = await fetch('https://io.eklas.dev/api/v1/license/generate', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${RESELLER_KEY}`
+      },
+      body: JSON.stringify({
+        plan: 'Trial',
+        durationValue: 30,
+        durationUnit: 'minute',
+        maxActivations: 5
+      })
+    });
+
+    const data = await res.json();
+    const key = data.license_key || data.key;
+
+    if (data.ok && key) {
+      display.innerText = key;
+      box.style.display = 'block';
+      btn.innerText = '✅ تم توليد المفتاح التجريبي!';
+    } else {
+      alert('خطأ أثناء توليد المفتاح: ' + (data.error || 'يرجى المحاولة لاحقاً'));
+      btn.disabled = false;
+      btn.innerText = '🎁 Get Trial Key (الحصول على المفتاح التجريبي)';
+    }
+  } catch (e) {
+    alert('فشل الاتصال بالخادم لتوليد المفتاح التجريبي');
+    btn.disabled = false;
+    btn.innerText = '🎁 Get Trial Key (الحصول على المفتاح التجريبي)';
+  }
+});
+
+document.getElementById('copy-trial-btn').addEventListener('click', () => {
+  const key = document.getElementById('generated-key-display').innerText;
+  navigator.clipboard.writeText(key).then(() => {
+    const btn = document.getElementById('copy-trial-btn');
+    btn.innerText = '✅ تم النسخ!';
+    setTimeout(() => btn.innerText = '📋 نسخ المفتاح (Copy Key)', 2000);
+  });
+});
+
+// FAQ Accordion
+document.querySelectorAll('.faq-item').forEach(item => {
+  item.querySelector('.faq-q').addEventListener('click', () => {
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+</script>
+</body>
+</html>
