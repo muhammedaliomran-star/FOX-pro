@@ -22,42 +22,37 @@
     <span class="brand-badge" id="plan-badge">Pro</span>
   </div>
   <div class="top-actions">
-    <!-- Language Toggle -->
     <div class="lang-toggle">
-      <button id="lang-ar" class="active" onclick="setLang('ar')">ع</button>
-      <button id="lang-en" onclick="setLang('en')">EN</button>
+      <button id="lang-ar" class="active">ع</button>
+      <button id="lang-en">EN</button>
     </div>
   </div>
 </div>
 
 <!-- ═══ NAV TABS ═══ -->
 <div class="nav-tabs">
-  <button class="nav-tab active" data-page="home" onclick="goTo('home')">
+  <button class="nav-tab active" data-page="home">
     <span class="tab-icon">🏠</span>
     <span class="tab-label" data-key="tab_home">الرئيسية</span>
   </button>
-  <button class="nav-tab" data-page="activate" onclick="goTo('activate')">
+  <button class="nav-tab" data-page="activate">
     <span class="tab-icon">🔑</span>
     <span class="tab-label" data-key="tab_activate">التفعيل</span>
   </button>
-  <button class="nav-tab" data-page="settings" onclick="goTo('settings')">
+  <button class="nav-tab" data-page="settings">
     <span class="tab-icon">⚙️</span>
     <span class="tab-label" data-key="tab_settings">الإعدادات</span>
   </button>
-  <button class="nav-tab" data-page="help" onclick="goTo('help')">
+  <button class="nav-tab" data-page="help">
     <span class="tab-icon">❓</span>
     <span class="tab-label" data-key="tab_help">المساعدة</span>
   </button>
 </div>
 
-<!-- ═══════════════════════════════
-     PAGE 1: HOME / الرئيسية
-════════════════════════════════ -->
+<!-- PAGE 1: HOME -->
 <div id="page-home" class="page active">
-
-  <!-- License Hero -->
   <div class="license-hero" id="hero-section">
-    <div class="license-hero-icon" id="hero-icon">🔓</div>
+    <div class="license-hero-icon" id="hero-icon">🔒</div>
     <h2 id="hero-title">مرحباً بك في Lovable Pro</h2>
     <p id="hero-subtitle">فعّل ترخيصك للاستمتاع بالبناء غير المحدود</p>
     <div style="margin-top:10px">
@@ -68,13 +63,11 @@
     </div>
   </div>
 
-  <!-- Alert (shown on errors) -->
   <div class="alert error" id="home-alert" style="display:none">
     <span>⚠️</span>
     <span id="home-alert-text"></span>
   </div>
 
-  <!-- Stats Grid (shown when active) -->
   <div class="stats-grid" id="stats-section" style="display:none">
     <div class="stat-card">
       <div class="stat-label" data-key="stat_plan">الخطة</div>
@@ -94,7 +87,6 @@
     </div>
   </div>
 
-  <!-- Expiry bar -->
   <div class="expiry-bar-wrap" id="expiry-wrap" style="display:none">
     <div class="expiry-bar-label">
       <span data-key="expiry_remaining">المتبقي</span>
@@ -105,66 +97,43 @@
     </div>
   </div>
 
-  <!-- License key display -->
   <div id="key-display-wrap" style="display:none; margin-top:10px">
     <div class="card-title" data-key="your_key" style="margin-bottom:6px">مفتاح الترخيص</div>
-    <span class="key-display" id="key-display" title="انقر للنسخ" onclick="copyKey()">EKLAS-XXXX-XXXX-XXXX</span>
+    <span class="key-display" id="key-display" title="انقر للنسخ">EKLAS-XXXX-XXXX-XXXX</span>
   </div>
 
-  <!-- Buttons -->
   <div style="margin-top:12px; display:flex; flex-direction:column; gap:8px;">
-    <button class="btn btn-primary" id="btn-reload" onclick="reloadLovable()" style="display:none">
+    <button class="btn btn-primary" id="btn-reload" style="display:none">
       <span>🔄</span> <span data-key="btn_reload">تحديث Lovable</span>
     </button>
-    <button class="btn btn-secondary" onclick="goTo('activate')" id="btn-go-activate">
+    <button class="btn btn-secondary" id="btn-go-activate">
       <span>🔑</span> <span data-key="btn_activate_now">تفعيل الترخيص</span>
     </button>
   </div>
-
 </div>
 
-<!-- ═══════════════════════════════
-     PAGE 2: ACTIVATE / التفعيل
-════════════════════════════════ -->
+<!-- PAGE 2: ACTIVATE -->
 <div id="page-activate" class="page">
-
   <div class="card">
     <div class="card-header">
       <span class="card-title" data-key="activate_title">تفعيل الترخيص</span>
     </div>
-
     <div class="field-group">
       <label class="field-label" data-key="key_label">مفتاح الترخيص</label>
-      <input
-        class="field-input mono"
-        id="license-input"
-        type="text"
-        placeholder="EKLAS-XXXX-XXXX-XXXX-XXXX"
-        autocomplete="off"
-        spellcheck="false"
-      />
+      <input class="field-input mono" id="license-input" type="text"
+        placeholder="EKLAS-XXXX-XXXX-XXXX-XXXX" autocomplete="off" spellcheck="false"/>
     </div>
-
     <div class="field-group">
       <label class="field-label" data-key="email_label">البريد الإلكتروني (اختياري)</label>
-      <input
-        class="field-input"
-        id="email-input"
-        type="email"
-        placeholder="your@email.com"
-      />
+      <input class="field-input" id="email-input" type="email" placeholder="your@email.com"/>
     </div>
-
     <div class="alert error" id="activate-error" style="display:none">
-      <span>❌</span>
-      <span id="activate-error-text"></span>
+      <span>❌</span><span id="activate-error-text"></span>
     </div>
     <div class="alert success" id="activate-success" style="display:none">
-      <span>✅</span>
-      <span id="activate-success-text"></span>
+      <span>✅</span><span id="activate-success-text"></span>
     </div>
-
-    <button class="btn btn-primary" id="btn-activate" onclick="activateLicense()">
+    <button class="btn btn-primary" id="btn-activate">
       <span>🔑</span> <span data-key="btn_activate">تفعيل الآن</span>
     </button>
   </div>
@@ -173,80 +142,71 @@
     <div class="card-header">
       <span class="card-title" data-key="current_license">الترخيص الحالي</span>
     </div>
-    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
       <span class="key-display" id="activate-key-display">—</span>
       <span class="status-pill active" id="activate-status-pill">
         <span class="status-dot"></span>
         <span data-key="active">نشط</span>
       </span>
     </div>
-    <button class="btn btn-danger btn-sm" onclick="deactivateLicense()">
+    <button class="btn btn-danger btn-sm" id="btn-deactivate">
       <span>🗑️</span> <span data-key="btn_deactivate">إلغاء التفعيل</span>
     </button>
   </div>
-
 </div>
 
-<!-- ═══════════════════════════════
-     PAGE 3: SETTINGS / الإعدادات
-════════════════════════════════ -->
+<!-- PAGE 3: SETTINGS -->
 <div id="page-settings" class="page">
-
   <div class="card">
     <div class="card-header">
       <span class="card-title" data-key="settings_general">عام</span>
     </div>
-
     <div class="toggle-row">
       <div class="toggle-info">
         <div class="t-label" data-key="setting_guard">حماية النموذج</div>
         <div class="t-desc" data-key="setting_guard_desc">منع استخدام Lovable بدون ترخيص</div>
       </div>
-      <div class="toggle on" id="toggle-guard" onclick="toggleSetting('guard')"></div>
+      <div class="toggle on" id="toggle-guard" data-setting="guard"></div>
     </div>
-
     <div class="toggle-row">
       <div class="toggle-info">
         <div class="t-label" data-key="setting_autotoken">جلب الجلسة تلقائياً</div>
         <div class="t-desc" data-key="setting_autotoken_desc">استخراج token عند فتح Lovable</div>
       </div>
-      <div class="toggle on" id="toggle-autotoken" onclick="toggleSetting('autotoken')"></div>
+      <div class="toggle on" id="toggle-autotoken" data-setting="autotoken"></div>
     </div>
-
     <div class="toggle-row">
       <div class="toggle-info">
         <div class="t-label" data-key="setting_notif">الإشعارات</div>
         <div class="t-desc" data-key="setting_notif_desc">تنبيه عند اقتراب انتهاء الترخيص</div>
       </div>
-      <div class="toggle on" id="toggle-notif" onclick="toggleSetting('notif')"></div>
+      <div class="toggle on" id="toggle-notif" data-setting="notif"></div>
     </div>
-
     <div class="toggle-row">
       <div class="toggle-info">
         <div class="t-label" data-key="setting_watermark">إزالة العلامة المائية</div>
         <div class="t-desc" data-key="setting_watermark_desc">إزالة "Built with Lovable" تلقائياً</div>
       </div>
-      <div class="toggle" id="toggle-watermark" onclick="toggleSetting('watermark')"></div>
+      <div class="toggle" id="toggle-watermark" data-setting="watermark"></div>
     </div>
-
   </div>
 
   <div class="card">
     <div class="card-header">
       <span class="card-title" data-key="settings_session">جلسة Lovable</span>
     </div>
-    <div style="font-size:11px; color:var(--text-muted); margin-bottom:10px" data-key="session_desc">
-      الجلسة تُجلب تلقائياً عند فتح Lovable. يمكنك إدخالها يدوياً هنا.
+    <div style="font-size:11px;color:var(--text-muted);margin-bottom:10px" data-key="session_desc">
+      الجلسة تُجلب تلقائياً عند فتح Lovable.
     </div>
     <div class="field-group">
       <label class="field-label">Session Token</label>
-      <input class="field-input mono" id="token-input" type="password" placeholder="eyJ..." />
+      <input class="field-input mono" id="token-input" type="password" placeholder="eyJ..."/>
     </div>
     <div class="field-group">
       <label class="field-label" data-key="project_id">Project ID</label>
-      <input class="field-input mono" id="project-input" type="text" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" />
+      <input class="field-input mono" id="project-input" type="text" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"/>
     </div>
-    <button class="btn btn-secondary" onclick="saveSession()">
+    <button class="btn btn-secondary" id="btn-save-session">
       <span>💾</span> <span data-key="btn_save">حفظ</span>
     </button>
   </div>
@@ -255,90 +215,85 @@
     <div class="card-header">
       <span class="card-title" data-key="settings_danger">خطر</span>
     </div>
-    <button class="btn btn-danger" onclick="clearAll()">
+    <button class="btn btn-danger" id="btn-clear-all">
       <span>🗑️</span> <span data-key="btn_clear_all">مسح كل البيانات</span>
     </button>
   </div>
-
 </div>
 
-<!-- ═══════════════════════════════
-     PAGE 4: HELP / المساعدة
-════════════════════════════════ -->
+<!-- PAGE 4: HELP -->
 <div id="page-help" class="page">
-
   <div class="alert info">
     <span>💡</span>
     <span data-key="help_intro">تجد هنا حلول لأكثر المشكلات شيوعاً.</span>
   </div>
 
-  <div class="help-item" onclick="toggleHelp(this)">
+  <div class="help-item">
     <div class="help-item-header">
       <div class="help-item-icon orange">⚡</div>
       <span class="help-item-title" data-key="help_1_title">الإضافة مش بتشتغل</span>
       <span class="help-item-arrow">▼</span>
     </div>
-    <div class="help-item-body" data-key="help_1_body">
-      تأكد من أن الترخيص مفعّل من صفحة التفعيل.
-      أعد تحميل صفحة Lovable بعد التفعيل.
+    <div class="help-item-body">
+      تأكد من أن الترخيص مفعّل من صفحة التفعيل.<br>
+      أعد تحميل صفحة Lovable بعد التفعيل.<br>
       تأكد من وجود كريديت واحد على الأقل في حسابك.
     </div>
   </div>
 
-  <div class="help-item" onclick="toggleHelp(this)">
+  <div class="help-item">
     <div class="help-item-header">
       <div class="help-item-icon red">🔒</div>
       <span class="help-item-title" data-key="help_2_title">طلب إكمال CAPTCHA</span>
       <span class="help-item-arrow">▼</span>
     </div>
-    <div class="help-item-body" data-key="help_2_body">
+    <div class="help-item-body">
       <strong>الحل 1:</strong> أوقف الإضافة، أرسل برومبت عادي، أكمل الـ CAPTCHA، ثم أعد تشغيلها.<br><br>
       <strong>الحل 2:</strong> استخدم VPN أو غير الخادم.<br><br>
       <strong>الحل 3:</strong> سجّل خروج ودخول من Lovable.
     </div>
   </div>
 
-  <div class="help-item" onclick="toggleHelp(this)">
+  <div class="help-item">
     <div class="help-item-header">
       <div class="help-item-icon purple">💳</div>
       <span class="help-item-title" data-key="help_3_title">رسالة "0 Credits"</span>
       <span class="help-item-arrow">▼</span>
     </div>
-    <div class="help-item-body" data-key="help_3_body">
+    <div class="help-item-body">
       الإضافة تحتاج كريديت واحد على الأقل.<br><br>
       <strong>الحل 1:</strong> انتظر إعادة تعيين 5 كريديتات المجانية (24 ساعة).<br><br>
       <strong>الحل 2:</strong> استخدم مساحة عمل أخرى بها كريديت.
     </div>
   </div>
 
-  <div class="help-item" onclick="toggleHelp(this)">
+  <div class="help-item">
     <div class="help-item-header">
       <div class="help-item-icon green">🌐</div>
       <span class="help-item-title" data-key="help_4_title">نشاط مريب / تم الحظر</span>
       <span class="help-item-arrow">▼</span>
     </div>
-    <div class="help-item-body" data-key="help_4_body">
+    <div class="help-item-body">
       <strong>الحل 1:</strong> غيّر الـ IP باستخدام VPN.<br><br>
       <strong>الحل 2:</strong> استخدم حساب Lovable آخر.
     </div>
   </div>
 
-  <div class="help-item" onclick="toggleHelp(this)">
+  <div class="help-item">
     <div class="help-item-header">
       <div class="help-item-icon orange">📋</div>
       <span class="help-item-title" data-key="help_5_title">الاستخدام الصحيح</span>
       <span class="help-item-arrow">▼</span>
     </div>
-    <div class="help-item-body" data-key="help_5_body">
+    <div class="help-item-body">
       • أعد تحميل Lovable بعد تفعيل الترخيص.<br>
       • بعد إرسال برومبت، تأكد من ظهور "Lovable" في حقل الإدخال.<br>
       • إذا ظهر برومبتك بدلاً من "Lovable"، أعد التحميل وحاول مرة أخرى.
     </div>
   </div>
-
 </div>
 
-<!-- ═══ FOOTER ═══ -->
+<!-- FOOTER -->
 <div class="popup-footer">
   <span style="color:var(--text-muted)" data-key="footer_copy">© 2026 Lovable Pro</span>
   <span class="footer-version">v1.0.0</span>
