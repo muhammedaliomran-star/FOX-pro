@@ -1,11 +1,14 @@
 // ══════════════════════════════════════════
 //  Lovable Pro — Popup Controller
-//  NO inline onclick — all addEventListener
+//  🟢 OPEN SOURCE VERSION — No license required
 // ══════════════════════════════════════════
 
-const API_BASE = 'https://io.eklas.dev/api/v1';
-const RESELLER_API_KEY = '21098106_live_Tetg7cxqzbiqdKEGPFZGiZgGxH4YOEnI';
+// ── تم إزالة API_BASE و RESELLER_API_KEY ──
+// const API_BASE = 'https://io.eklas.dev/api/v1';
+// const RESELLER_API_KEY = '...';
+
 let licenseData = null;
+let currentLang = 'ar'; // default
 
 // ═══════════════════════════════
 //  DOM Ready — Wire everything
@@ -21,7 +24,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   ]);
 
   // ── Language ──
-  applyLang(store.lp_lang || 'ar');
+  currentLang = store.lp_lang || 'ar';
+  applyLang(currentLang);
   document.getElementById('lang-ar').addEventListener('click', () => setLang('ar'));
   document.getElementById('lang-en').addEventListener('click', () => setLang('en'));
 
@@ -38,6 +42,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // ── Activate page ──
   document.getElementById('btn-activate').addEventListener('click', activateLicense);
   document.getElementById('btn-deactivate').addEventListener('click', deactivateLicense);
+  // زر التجربة أصبح يعطي ترخيص وهمي فوري
   document.getElementById('btn-get-trial').addEventListener('click', getTrialKey);
 
   // ── Settings page ──
@@ -65,11 +70,13 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (store.lp_project_id) document.getElementById('project-input').value = store.lp_project_id;
   if (store.lp_license_key) document.getElementById('license-input').value = store.lp_license_key;
 
-  // ── Render license status ──
+  // ── Render license status (always active in open-source version) ──
+  // إذا كان هناك مفتاح مخزن، استخدمه، وإلا اعرض واجهة الترخيص
   if (store.lp_license_valid && store.lp_license_key) {
-    licenseData = store.lp_license_info || null;
+    licenseData = store.lp_license_info || { plan: 'Open Source', status: 'active', expires_at: null };
     renderActiveLicense(store.lp_license_key, licenseData);
   } else {
+    // في النسخة مفتوحة المصدر، نعرض واجهة الترحيب مع إمكانية التفعيل الفوري
     renderInactiveLicense();
   }
 });
@@ -88,8 +95,11 @@ function goTo(page) {
 //  Language
 // ═══════════════════════════════
 function setLang(lang) {
+  currentLang = lang;
   applyLang(lang);
   chrome.storage.local.set({ lp_lang: lang });
+  // إعادة تحميل الواجهة لتطبيق الترجمة
+  location.reload();
 }
 
 // ═══════════════════════════════
@@ -104,15 +114,15 @@ function renderActiveLicense(key, info) {
   pill.className = 'status-pill ' + (info?.plan === 'Trial' ? 'trial' : 'active');
   document.getElementById('status-text').textContent =
     info?.plan === 'Trial' ? t('status_trial') : t('status_active');
-  document.getElementById('plan-badge').textContent = info?.plan || 'Pro';
+  document.getElementById('plan-badge').textContent = info?.plan || 'Open Source';
 
   document.getElementById('stats-section').style.display = 'grid';
-  document.getElementById('stat-plan').textContent = info?.plan || 'Pro';
+  document.getElementById('stat-plan').textContent = info?.plan || 'Open Source';
   document.getElementById('stat-status').textContent = '✓ ' + t('status_active');
 
   if (info?.expires_at) {
     const exp = new Date(info.expires_at);
-    const totalDays = info.duration_minutes ? Math.round(info.duration_minutes / 1440) : 30;
+    const totalDays = info.duration_minutes ? Math.round(info.duration_minutes / 1440) : 365;
     const daysLeft = Math.max(0, Math.round((exp - Date.now()) / 86400000));
     const pct = Math.min(100, Math.round((daysLeft / totalDays) * 100));
 
@@ -120,6 +130,12 @@ function renderActiveLicense(key, info) {
     document.getElementById('expiry-wrap').style.display = 'block';
     document.getElementById('expiry-days').textContent = daysLeft + (currentLang === 'ar' ? ' يوم' : ' days');
     document.getElementById('expiry-fill').style.width = pct + '%';
+  } else {
+    // إذا لم يكن هناك تاريخ انتهاء (نسخة مفتوحة المصدر)
+    document.getElementById('stat-expires').textContent = currentLang === 'ar' ? 'غير محدود' : 'Unlimited';
+    document.getElementById('expiry-wrap').style.display = 'block';
+    document.getElementById('expiry-days').textContent = currentLang === 'ar' ? '♾️ غير محدود' : '♾️ Unlimited';
+    document.getElementById('expiry-fill').style.width = '100%';
   }
 
   document.getElementById('key-display-wrap').style.display = 'block';
@@ -132,12 +148,14 @@ function renderActiveLicense(key, info) {
 }
 
 function renderInactiveLicense() {
-  document.getElementById('hero-icon').textContent = '🔒';
+  document.getElementById('hero-icon').textContent = '🔓';
   document.getElementById('hero-title').textContent = t('hero_welcome');
-  document.getElementById('hero-subtitle').textContent = t('hero_sub_inactive');
+  document.getElementById('hero-subtitle').textContent = currentLang === 'ar' 
+    ? 'نسخة مفتوحة المصدر — اضغط "تفعيل" لبدء الاستخدام' 
+    : 'Open source version — Click "Activate" to start';
   document.getElementById('status-pill').className = 'status-pill inactive';
-  document.getElementById('status-text').textContent = t('status_inactive');
-  document.getElementById('plan-badge').textContent = 'Pro';
+  document.getElementById('status-text').textContent = currentLang === 'ar' ? 'غير مفعل' : 'Inactive';
+  document.getElementById('plan-badge').textContent = 'Open Source';
   document.getElementById('stats-section').style.display = 'none';
   document.getElementById('expiry-wrap').style.display = 'none';
   document.getElementById('key-display-wrap').style.display = 'none';
@@ -147,7 +165,7 @@ function renderInactiveLicense() {
 }
 
 // ═══════════════════════════════
-//  Generate Trial Key
+//  Generate Trial Key (BYPASSED - gives fake key)
 // ═══════════════════════════════
 async function getTrialKey() {
   const btn = document.getElementById('btn-get-trial');
@@ -156,41 +174,31 @@ async function getTrialKey() {
   hideAlert('activate-error');
   hideAlert('activate-success');
 
-  try {
-    const res = await fetch(`${API_BASE}/license/generate`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${RESELLER_API_KEY}`
-      },
-      body: JSON.stringify({
-        plan: 'Trial',
-        durationValue: 30,
-        durationUnit: 'minute',
-        maxActivations: 5
-      })
-    });
+  // 🟢 توليد مفتاح وهمي (open-source)
+  const fakeKey = 'OPEN-' + Math.random().toString(36).substring(2, 10).toUpperCase() + 
+                  '-' + Math.random().toString(36).substring(2, 10).toUpperCase() +
+                  '-' + Math.random().toString(36).substring(2, 6).toUpperCase();
 
-    const data = await res.json();
-    const key = data.license_key || data.key;
-
-    if (data.ok && key) {
-      document.getElementById('license-input').value = key;
-      await activateLicense();
-    } else {
-      showAlert('activate-error', data.error || (currentLang === 'ar' ? 'فشل توليد المفتاح التجريبي' : 'Failed to generate trial key'));
-      btn.disabled = false;
-      btn.innerHTML = `<span>⚡</span> <span>${t('btn_get_trial')}</span>`;
+  // تخزين المفتاح الوهمي
+  await chrome.storage.local.set({
+    lp_license_key: fakeKey,
+    lp_license_valid: true,
+    lp_license_info: {
+      plan: 'Open Source',
+      status: 'active',
+      expires_at: new Date(Date.now() + 365 * 86400000).toISOString(),
+      duration_minutes: 525600 // سنة كاملة
     }
-  } catch (e) {
-    showAlert('activate-error', currentLang === 'ar' ? 'خطأ في الاتصال أثناء توليد المفتاح' : 'Connection error while generating key');
-    btn.disabled = false;
-    btn.innerHTML = `<span>⚡</span> <span>${t('btn_get_trial')}</span>`;
-  }
+  });
+
+  document.getElementById('license-input').value = fakeKey;
+  await activateLicense(); // ينفذ التفعيل المحلي
+  btn.disabled = false;
+  btn.innerHTML = `<span>⚡</span> <span>${t('btn_get_trial')}</span>`;
 }
 
 // ═══════════════════════════════
-//  Activate License
+//  Activate License (LOCAL - no server)
 // ═══════════════════════════════
 async function activateLicense() {
   const key   = document.getElementById('license-input').value.trim();
@@ -208,31 +216,29 @@ async function activateLicense() {
   btn.disabled = true;
   btn.innerHTML = `<div class="btn-spinner"></div> ${t('activating')}`;
 
+  // 🟢 تفعيل محلي بدون اتصال بالسيرفر
   try {
-    const res = await fetch(`${API_BASE}/licenses/validate`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ key, licenseKey: key, email, extensionVersion: '1.0.0', heartbeat: false }),
-    });
-    const data = await res.json();
-    const ok = !!(data.ok || data.valid || data.status === 'active');
+    // تخزين الترخيص محلياً
+    const fakeInfo = {
+      plan: 'Open Source',
+      status: 'active',
+      expires_at: new Date(Date.now() + 365 * 86400000).toISOString(),
+      duration_minutes: 525600
+    };
 
-    if (ok) {
-      await chrome.storage.local.set({
-        lp_license_key: key,
-        lp_email: email,
-        lp_license_valid: true,
-        lp_license_info: data.license || data,
-      });
-      licenseData = data.license || data;
-      showAlert('activate-success', t('activated_ok'));
-      renderActiveLicense(key, licenseData);
-      setTimeout(() => goTo('home'), 1500);
-    } else {
-      showAlert('activate-error', data.error || (currentLang === 'ar' ? 'مفتاح غير صحيح' : 'Invalid license key'));
-    }
-  } catch {
-    showAlert('activate-error', currentLang === 'ar' ? 'فشل الاتصال بالخادم' : 'Connection failed');
+    await chrome.storage.local.set({
+      lp_license_key: key,
+      lp_email: email,
+      lp_license_valid: true,
+      lp_license_info: fakeInfo,
+    });
+
+    licenseData = fakeInfo;
+    showAlert('activate-success', currentLang === 'ar' ? '✅ تم التفعيل بنجاح!' : '✅ Activated successfully!');
+    renderActiveLicense(key, fakeInfo);
+    setTimeout(() => goTo('home'), 1500);
+  } catch (e) {
+    showAlert('activate-error', currentLang === 'ar' ? 'حدث خطأ أثناء التفعيل' : 'Activation error');
   }
 
   btn.disabled = false;
@@ -318,6 +324,7 @@ function maskKey(key) {
   if (!key) return '—';
   const parts = key.split('-');
   if (parts.length >= 5) return `${parts[0]}-${parts[1]}-****-****-${parts[4]}`;
+  if (key.length > 12) return key.substring(0, 8) + '...' + key.substring(key.length - 4);
   return key.substring(0, 8) + '...';
 }
 
