@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Lovable Pro",
+  "name": "FOX pro",
   "version": "1.0.0",
-  "description": "Lovable Pro — Unlimited AI builds. Professional license manager.",
+  "description": "FOX Pro — Unlimited AI builds. Professional license manager.",
   "icons": {
     "16": "icons/icon-ar-16.png",
     "32": "icons/icon-ar-32.png",
