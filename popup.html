@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lovable Pro</title>
+<title>Lovable Open</title>
 <link rel="stylesheet" href="styles/main.css">
 </head>
 <body class="rtl" id="body">
@@ -17,9 +17,9 @@
   <div class="brand">
     <div class="brand-logo">L</div>
     <div>
-      <div class="brand-name">Lovable <span>Pro</span></div>
+      <div class="brand-name">Lovable <span>Open</span></div>
     </div>
-    <span class="brand-badge" id="plan-badge">Pro</span>
+    <span class="brand-badge" id="plan-badge" style="background:rgba(0,200,150,0.15);color:#00c896;">Open Source</span>
   </div>
   <div class="top-actions">
     <div class="lang-toggle">
@@ -52,9 +52,9 @@
 <!-- PAGE 1: HOME -->
 <div id="page-home" class="page active">
   <div class="license-hero" id="hero-section">
-    <div class="license-hero-icon" id="hero-icon">🔒</div>
-    <h2 id="hero-title">مرحباً بك في Lovable Pro</h2>
-    <p id="hero-subtitle">فعّل ترخيصك للاستمتاع بالبناء غير المحدود</p>
+    <div class="license-hero-icon" id="hero-icon">🔓</div>
+    <h2 id="hero-title">مرحباً بك في Lovable Open</h2>
+    <p id="hero-subtitle">نسخة مفتوحة المصدر — اضغط "تفعيل" لبدء الاستخدام</p>
     <div style="margin-top:10px">
       <span class="status-pill inactive" id="status-pill">
         <span class="status-dot"></span>
@@ -71,7 +71,7 @@
   <div class="stats-grid" id="stats-section" style="display:none">
     <div class="stat-card">
       <div class="stat-label" data-key="stat_plan">الخطة</div>
-      <div class="stat-value accent" id="stat-plan">Pro</div>
+      <div class="stat-value accent" id="stat-plan">Open Source</div>
     </div>
     <div class="stat-card">
       <div class="stat-label" data-key="stat_status">الحالة</div>
@@ -83,23 +83,23 @@
     </div>
     <div class="stat-card">
       <div class="stat-label" data-key="stat_expires">الانتهاء</div>
-      <div class="stat-value" id="stat-expires" style="font-size:12px">—</div>
+      <div class="stat-value" id="stat-expires" style="font-size:12px">غير محدود</div>
     </div>
   </div>
 
   <div class="expiry-bar-wrap" id="expiry-wrap" style="display:none">
     <div class="expiry-bar-label">
       <span data-key="expiry_remaining">المتبقي</span>
-      <span id="expiry-days">— يوم</span>
+      <span id="expiry-days">♾️ غير محدود</span>
     </div>
     <div class="expiry-bar">
-      <div class="expiry-bar-fill" id="expiry-fill" style="width:80%"></div>
+      <div class="expiry-bar-fill" id="expiry-fill" style="width:100%"></div>
     </div>
   </div>
 
   <div id="key-display-wrap" style="display:none; margin-top:10px">
     <div class="card-title" data-key="your_key" style="margin-bottom:6px">مفتاح الترخيص</div>
-    <span class="key-display" id="key-display" title="انقر للنسخ">EKLAS-XXXX-XXXX-XXXX</span>
+    <span class="key-display" id="key-display" title="انقر للنسخ">OPEN-XXXX-XXXX-XXXX</span>
   </div>
 
   <div style="margin-top:12px; display:flex; flex-direction:column; gap:8px;">
@@ -114,15 +114,15 @@
 
 <!-- PAGE 2: ACTIVATE -->
 <div id="page-activate" class="page">
-  <div class="card" style="border-color: rgba(162,89,255,0.25); background: linear-gradient(135deg, rgba(162,89,255,0.05), rgba(255,90,0,0.03));">
+  <div class="card" style="border-color: rgba(0,200,150,0.25); background: linear-gradient(135deg, rgba(0,200,150,0.05), rgba(0,150,255,0.03));">
     <div class="card-header">
-      <span class="card-title" style="color:var(--accent-2)" data-key="trial_card_title">🎁 تجربة مجانية</span>
+      <span class="card-title" style="color:var(--accent-2)" data-key="trial_card_title">🎁 تفعيل فوري</span>
     </div>
     <p style="font-size:11px; color:var(--text-secondary); margin-bottom:10px; line-height:1.5" data-key="trial_card_desc">
-      احصل على مفتاح تجريبي فوري لمدة 30 دقيقة لاختبار الإضافة فوراً!
+      اضغط على الزر للحصول على ترخيص فوري في النسخة مفتوحة المصدر.
     </p>
-    <button class="btn btn-secondary" id="btn-get-trial" style="border-color:rgba(162,89,255,0.4); color:var(--accent-2); background:rgba(162,89,255,0.1)">
-      <span>⚡</span> <span data-key="btn_get_trial">توليد مفتاح تجريبي (30 دقيقة)</span>
+    <button class="btn btn-secondary" id="btn-get-trial" style="border-color:rgba(0,200,150,0.4); color:#00c896; background:rgba(0,200,150,0.1)">
+      <span>⚡</span> <span data-key="btn_get_trial">تفعيل النسخة المفتوحة</span>
     </button>
   </div>
 
@@ -133,7 +133,7 @@
     <div class="field-group">
       <label class="field-label" data-key="key_label">مفتاح الترخيص</label>
       <input class="field-input mono" id="license-input" type="text"
-        placeholder="EKLAS-XXXX-XXXX-XXXX-XXXX" autocomplete="off" spellcheck="false"/>
+        placeholder="أدخل أي مفتاح (مثلاً: OPEN-XXXX-XXXX)" autocomplete="off" spellcheck="false"/>
     </div>
     <div class="field-group">
       <label class="field-label" data-key="email_label">البريد الإلكتروني (اختياري)</label>
@@ -243,7 +243,11 @@
       </div>
       <div style="display:flex;justify-content:space-between">
         <span data-key="about_dev">المطور</span>
-        <span style="color:var(--text-primary);font-weight:600">seotarek</span>
+        <span style="color:var(--text-primary);font-weight:600" id="dev-name">Your Name</span>
+      </div>
+      <div style="display:flex;justify-content:space-between">
+        <span>الترخيص</span>
+        <span style="color:var(--text-primary);font-weight:600">MIT (Open Source)</span>
       </div>
     </div>
   </div>
@@ -323,7 +327,7 @@
 
 <!-- FOOTER -->
 <div class="popup-footer">
-  <span style="color:var(--text-muted)" data-key="footer_copy">© 2026 Lovable Pro</span>
+  <span style="color:var(--text-muted)" data-key="footer_copy">© 2026 Lovable Open</span>
   <span class="footer-version">v1.0.0</span>
 </div>
 
