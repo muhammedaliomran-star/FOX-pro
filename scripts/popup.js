@@ -21,6 +21,25 @@ document.addEventListener('DOMContentLoaded', async () => {
     'lp_license_valid', 'lp_license_info',
     'lp_token', 'lp_project_id',
     'lp_guard', 'lp_autotoken', 'lp_notif', 'lp_watermark',
+    // 🟢 تفعيل تلقائي عند فتح الـ popup (لأول مرة)
+const store = await getStorage(['lp_license_valid', 'lp_license_key']);
+if (!store.lp_license_valid || !store.lp_license_key) {
+    // توليد مفتاح وهمي وتفعيله
+    const fakeKey = 'OPEN-' + Math.random().toString(36).substring(2, 10).toUpperCase() + 
+                    '-' + Math.random().toString(36).substring(2, 10).toUpperCase();
+    await chrome.storage.local.set({
+        lp_license_key: fakeKey,
+        lp_license_valid: true,
+        lp_license_info: {
+            plan: 'Open Source',
+            status: 'active',
+            expires_at: new Date(Date.now() + 365 * 86400000).toISOString(),
+            duration_minutes: 525600
+        }
+    });
+    // إعادة تحميل الواجهة
+    location.reload();
+}
   ]);
 
   // ── Language ──
