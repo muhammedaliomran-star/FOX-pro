@@ -3,10 +3,6 @@
 //  🟢 OPEN SOURCE VERSION — No license required
 // ══════════════════════════════════════════
 
-// ── تم إزالة API_BASE و RESELLER_API_KEY ──
-// const API_BASE = 'https://io.eklas.dev/api/v1';
-// const RESELLER_API_KEY = '...';
-
 let licenseData = null;
 let currentLang = 'ar'; // default
 
@@ -20,27 +16,27 @@ document.addEventListener('DOMContentLoaded', async () => {
     'lp_lang', 'lp_license_key', 'lp_email',
     'lp_license_valid', 'lp_license_info',
     'lp_token', 'lp_project_id',
-    'lp_guard', 'lp_autotoken', 'lp_notif', 'lp_watermark',
-    // 🟢 تفعيل تلقائي عند فتح الـ popup (لأول مرة)
-const store = await getStorage(['lp_license_valid', 'lp_license_key']);
-if (!store.lp_license_valid || !store.lp_license_key) {
-    // توليد مفتاح وهمي وتفعيله
-    const fakeKey = 'OPEN-' + Math.random().toString(36).substring(2, 10).toUpperCase() + 
+    'lp_guard', 'lp_autotoken', 'lp_notif', 'lp_watermark'
+  ]);
+
+  // 🟢 تفعيل تلقائي إذا لم يكن هناك ترخيص (لأول مرة)
+  if (!store.lp_license_valid || !store.lp_license_key) {
+    const fakeKey = 'OPEN-' + Math.random().toString(36).substring(2, 10).toUpperCase() +
                     '-' + Math.random().toString(36).substring(2, 10).toUpperCase();
     await chrome.storage.local.set({
-        lp_license_key: fakeKey,
-        lp_license_valid: true,
-        lp_license_info: {
-            plan: 'Open Source',
-            status: 'active',
-            expires_at: new Date(Date.now() + 365 * 86400000).toISOString(),
-            duration_minutes: 525600
-        }
+      lp_license_key: fakeKey,
+      lp_license_valid: true,
+      lp_license_info: {
+        plan: 'Open Source',
+        status: 'active',
+        expires_at: new Date(Date.now() + 365 * 86400000).toISOString(),
+        duration_minutes: 525600
+      }
     });
-    // إعادة تحميل الواجهة
+    // بعد التفعيل، نعيد تحميل الـ popup عشان تظهر الحالة النشطة
     location.reload();
-}
-  ]);
+    return; // نوقف تنفيذ باقي الكود لأن الصفحة هتعيد التحميل
+  }
 
   // ── Language ──
   currentLang = store.lp_lang || 'ar';
@@ -61,7 +57,6 @@ if (!store.lp_license_valid || !store.lp_license_key) {
   // ── Activate page ──
   document.getElementById('btn-activate').addEventListener('click', activateLicense);
   document.getElementById('btn-deactivate').addEventListener('click', deactivateLicense);
-  // زر التجربة أصبح يعطي ترخيص وهمي فوري
   document.getElementById('btn-get-trial').addEventListener('click', getTrialKey);
 
   // ── Settings page ──
@@ -89,13 +84,11 @@ if (!store.lp_license_valid || !store.lp_license_key) {
   if (store.lp_project_id) document.getElementById('project-input').value = store.lp_project_id;
   if (store.lp_license_key) document.getElementById('license-input').value = store.lp_license_key;
 
-  // ── Render license status (always active in open-source version) ──
-  // إذا كان هناك مفتاح مخزن، استخدمه، وإلا اعرض واجهة الترخيص
+  // ── Render license status ──
   if (store.lp_license_valid && store.lp_license_key) {
     licenseData = store.lp_license_info || { plan: 'Open Source', status: 'active', expires_at: null };
     renderActiveLicense(store.lp_license_key, licenseData);
   } else {
-    // في النسخة مفتوحة المصدر، نعرض واجهة الترحيب مع إمكانية التفعيل الفوري
     renderInactiveLicense();
   }
 });
@@ -117,7 +110,6 @@ function setLang(lang) {
   currentLang = lang;
   applyLang(lang);
   chrome.storage.local.set({ lp_lang: lang });
-  // إعادة تحميل الواجهة لتطبيق الترجمة
   location.reload();
 }
 
@@ -150,7 +142,6 @@ function renderActiveLicense(key, info) {
     document.getElementById('expiry-days').textContent = daysLeft + (currentLang === 'ar' ? ' يوم' : ' days');
     document.getElementById('expiry-fill').style.width = pct + '%';
   } else {
-    // إذا لم يكن هناك تاريخ انتهاء (نسخة مفتوحة المصدر)
     document.getElementById('stat-expires').textContent = currentLang === 'ar' ? 'غير محدود' : 'Unlimited';
     document.getElementById('expiry-wrap').style.display = 'block';
     document.getElementById('expiry-days').textContent = currentLang === 'ar' ? '♾️ غير محدود' : '♾️ Unlimited';
@@ -193,12 +184,10 @@ async function getTrialKey() {
   hideAlert('activate-error');
   hideAlert('activate-success');
 
-  // 🟢 توليد مفتاح وهمي (open-source)
   const fakeKey = 'OPEN-' + Math.random().toString(36).substring(2, 10).toUpperCase() + 
                   '-' + Math.random().toString(36).substring(2, 10).toUpperCase() +
                   '-' + Math.random().toString(36).substring(2, 6).toUpperCase();
 
-  // تخزين المفتاح الوهمي
   await chrome.storage.local.set({
     lp_license_key: fakeKey,
     lp_license_valid: true,
@@ -206,12 +195,12 @@ async function getTrialKey() {
       plan: 'Open Source',
       status: 'active',
       expires_at: new Date(Date.now() + 365 * 86400000).toISOString(),
-      duration_minutes: 525600 // سنة كاملة
+      duration_minutes: 525600
     }
   });
 
   document.getElementById('license-input').value = fakeKey;
-  await activateLicense(); // ينفذ التفعيل المحلي
+  await activateLicense();
   btn.disabled = false;
   btn.innerHTML = `<span>⚡</span> <span>${t('btn_get_trial')}</span>`;
 }
@@ -235,9 +224,7 @@ async function activateLicense() {
   btn.disabled = true;
   btn.innerHTML = `<div class="btn-spinner"></div> ${t('activating')}`;
 
-  // 🟢 تفعيل محلي بدون اتصال بالسيرفر
   try {
-    // تخزين الترخيص محلياً
     const fakeInfo = {
       plan: 'Open Source',
       status: 'active',
